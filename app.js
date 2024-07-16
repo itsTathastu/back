@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+
+var whitelist = [ "https://master--athenaeum-the-library.netlify.app"] 
+const corsOptions = { origin: (origin, callback) => { if(!origin || whitelist.includes(origin)) { callback(null, true) } else { callback(new Error('Not allowed by CORS')) } }, credentials: true, origin: true } 
+app.use(cors(corsOptions));
 //--------------------------------------------------------------
 //Book Database
 mongoose
